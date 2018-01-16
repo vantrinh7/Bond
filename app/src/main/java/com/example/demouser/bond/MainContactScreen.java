@@ -1,17 +1,27 @@
 package com.example.demouser.bond;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 public class MainContactScreen extends AppCompatActivity {
+
+    private String m_Text = "";
+    private ArrayList<String> values = new ArrayList<>();
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,31 +36,52 @@ public class MainContactScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                initiateAddButton();
             }
         });
 
-        ListView contactList = (ListView) findViewById(R.id.contactList);
-        String[] values = new String[] { "Mary Lyon",
-                "Joanne Creighton",
-                "Simple List View In Android",
-                "Create List View Android",
-                "Android Example",
-                "List View Source Code",
-                "List View Array Adapter",
-                "Android Example List View"
-        };
 
-        // Define a new Adapter
-        // First parameter - Context
-        // Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written
-        // Forth - the Array of data
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+    ListView contactList = (ListView) findViewById(R.id.contactList);
 
-        // Assign adapter to ListView
+    values.add("Mary Lyon");
+
+    // Define a new Adapter
+    // First parameter - Context
+    // Second parameter - Layout for the row
+    // Third parameter - ID of the TextView to which the data is written
+    // Forth - the Array of data
+    adapter = new ArrayAdapter<String>(this,
+            android.R.layout.simple_list_item_1, android.R.id.text1, values);
+
+    // Assign adapter to ListView
         contactList.setAdapter(adapter);
 
+}
+
+    public void initiateAddButton() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Please fill in the name");
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                m_Text = input.getText().toString();
+                values.add(m_Text);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     @Override
