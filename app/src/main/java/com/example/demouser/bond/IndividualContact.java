@@ -11,5 +11,5 @@ public class IndividualContact {
     public IndividualContact (String name) {
         this.name = name;
     }
-    
+
 }

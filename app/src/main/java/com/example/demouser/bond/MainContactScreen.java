@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainContactScreen extends AppCompatActivity {
 
@@ -26,6 +28,29 @@ public class MainContactScreen extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        ListView contactList = (ListView) findViewById(R.id.contactList);
+        String[] values = new String[] { "Mary Lyon",
+                "Joanne Creighton",
+                "Simple List View In Android",
+                "Create List View Android",
+                "Android Example",
+                "List View Source Code",
+                "List View Array Adapter",
+                "Android Example List View"
+        };
+
+        // Define a new Adapter
+        // First parameter - Context
+        // Second parameter - Layout for the row
+        // Third parameter - ID of the TextView to which the data is written
+        // Forth - the Array of data
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+
+        // Assign adapter to ListView
+        contactList.setAdapter(adapter);
+
     }
 
     @Override
