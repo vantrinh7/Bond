@@ -81,7 +81,7 @@ public class MainContactScreen extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         // If the request code is the code for IndividualContactActivity
-        if (REQUEST_CODE_INDIVIDUAL_CONTACT_ACTIVITY == 0) {
+        if (requestCode == REQUEST_CODE_INDIVIDUAL_CONTACT_ACTIVITY) {
 
             // If the result code matches
             if (resultCode == RESULT_OK) {
