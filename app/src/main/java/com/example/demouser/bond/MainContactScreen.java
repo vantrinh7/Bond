@@ -1,6 +1,7 @@
 package com.example.demouser.bond;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,9 +20,12 @@ import java.util.ArrayList;
 
 public class MainContactScreen extends AppCompatActivity {
 
+    // Define a message variable that is the name of the package so that it is unique, in case this app interacts with other apps
+    public static final String EXTRA_MESSAGE = "com.example.demouser.bond.MESSAGE";
     private String m_Text = "";
     private ArrayList<String> values = new ArrayList<>();
     private ArrayAdapter<String> adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,47 +45,28 @@ public class MainContactScreen extends AppCompatActivity {
         });
 
 
-    ListView contactList = (ListView) findViewById(R.id.contactList);
+        ListView contactList = (ListView) findViewById(R.id.contactList);
 
-    values.add("Mary Lyon");
+        values.add("Mary Lyon");
 
-    // Define a new Adapter
-    // First parameter - Context
-    // Second parameter - Layout for the row
-    // Third parameter - ID of the TextView to which the data is written
-    // Forth - the Array of data
-    adapter = new ArrayAdapter<String>(this,
-            android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        // Define a new Adapter
+        // First parameter - Context
+        // Second parameter - Layout for the row
+        // Third parameter - ID of the TextView to which the data is written
+        // Forth - the Array of data
+        adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, values);
 
-    // Assign adapter to ListView
+        // Assign adapter to ListView
         contactList.setAdapter(adapter);
 
-}
+    }
 
     public void initiateAddButton() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Please fill in the name");
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-        // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                m_Text = input.getText().toString();
-                values.add(m_Text);
-                adapter.notifyDataSetChanged();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
+        Intent intent = new Intent(this, IndividualContactActivity.class);
+        String message = "This is a message";
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 
     @Override
