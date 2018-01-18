@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -121,19 +122,20 @@ public class MainContactScreen extends AppCompatActivity {
                 String name = data.getStringExtra(IndividualContactActivity.NAME_TEXT);
                 String email = data.getStringExtra(IndividualContactActivity.EMAIL_TEXT);
                 String phone = data.getStringExtra(IndividualContactActivity.PHONE_TEXT);
-                Uri image;
+                Uri imageUri = original;
                 if (data.hasExtra(IndividualContactActivity.IMAGE_TEXT)) {
-                    image = data.getParcelableExtra(IndividualContactActivity.IMAGE_TEXT);
-                    imageArray.add(image);
+                    String image = data.getStringExtra(IndividualContactActivity.IMAGE_TEXT);
+                    imageUri = Uri.parse(image);
+                    System.out.println("Uri is: " + imageUri);
+                    imageArray.add(imageUri);
                 }
                 else {
                     imageArray.add(original);
-                    image = original;
                 }
                 String note = data.getStringExtra(IndividualContactActivity.NOTE_TEXT);
 
                 //create new contact with given information
-                IndividualContact contact1 = new IndividualContact(name, email, phone, "2212", note, image);
+                IndividualContact contact1 = new IndividualContact(name, email, phone, "2212", note, imageUri);
                 //add contact to contactList HashMap with key = name and value = the contact
                 contacts.put(name, contact1);
                 //update name in name array

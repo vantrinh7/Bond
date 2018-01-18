@@ -43,7 +43,6 @@ public class CustomListAdapter extends ArrayAdapter {
         //this code sets the values of the objects to values from the arrays
         nameTextField.setText(nameArray.get(position));
         imageView.setImageURI(imageIDarray.get(position));
-
         return rowView;
 
     };

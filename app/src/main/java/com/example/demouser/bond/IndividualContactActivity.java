@@ -19,7 +19,7 @@ public class IndividualContactActivity extends AppCompatActivity {
     public static final String DATE_TEXT = "com.example.demouser.bond.DATE_TEXT";
     public static final String IMAGE_TEXT = "com.example.demouser.bond.IMAGE_TEXT";
     public static final String NOTE_TEXT = "com.example.demouser.bond.NOTE_TEXT";
-    protected Uri imageSrc;
+    protected String imageSrc="";
     private static int RESULT_LOAD_IMAGE = 1;
 
 
@@ -79,9 +79,11 @@ public class IndividualContactActivity extends AppCompatActivity {
                 intent.putExtra(DATE_TEXT, 2212);
                 intent.putExtra(NOTE_TEXT, note);
                 //if user added a new image then save the source of that image
-                if (imageSrc != null) {
+                if (!imageSrc.equals("")) {
                     intent.putExtra(IMAGE_TEXT, imageSrc);
                 }
+
+
 
                 // Set the result to be the intent just created
                 setResult(RESULT_OK, intent);
@@ -114,8 +116,7 @@ public class IndividualContactActivity extends AppCompatActivity {
 
             ImageView imageView = (ImageView) findViewById(R.id.picture);
             imageView.setImageURI(selectedImage);
-            imageSrc = selectedImage;
-
+            imageSrc = selectedImage.toString();
         }
 
     }
