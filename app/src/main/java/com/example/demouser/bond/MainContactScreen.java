@@ -2,6 +2,7 @@ package com.example.demouser.bond;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,19 +13,26 @@ import android.text.InputType;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainContactScreen extends AppCompatActivity {
 
     public static final int REQUEST_CODE_INDIVIDUAL_CONTACT_ACTIVITY = 0;
 
     private String m_Text = "";
-    private ArrayList<String> values = new ArrayList<>();
-    private ArrayAdapter<String> adapter;
+    private ArrayList<String> nameList = new ArrayList<>();
+    private ArrayList<Uri> imageArray = new ArrayList<> ();
+    private HashMap<String, IndividualContact> contacts = new HashMap<> ();
+    private CustomListAdapter adapter;
+    private ListView contactList;
+    private final Uri original = Uri.parse("android.resource://com.example.demouser.bond/drawable/octopus");
 
 
     @Override
@@ -43,19 +51,42 @@ public class MainContactScreen extends AppCompatActivity {
                 initiateAddButton();
             }
         });
-
-        ListView contactList = (ListView) findViewById(R.id.contactList);
-
-        values.add("Mary Lyon");
-
-        // Define a new Adapter: First parameter - Context, Second parameter - Layout for the row
-        // Third parameter - ID of the TextView to which the data is written, Forth - the Array of data
-        adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
-        // Assign adapter to ListView
-        contactList.setAdapter(adapter);
+        //set up contact list view
+        setupContactList();
     }
+
+    /**
+     * Method to set up the contact list view
+     */
+    public void setupContactList () {
+        //create and add adapter to ListView to display contacts
+        adapter = new CustomListAdapter(this, nameList, imageArray);
+        contactList = (ListView) findViewById(R.id.contactList);
+        contactList.setAdapter(adapter);
+
+        //make item in list clickable
+        contactList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainContactScreen.this, IndividualContactPage.class);
+                //get contact from contact HashMap
+                String message = nameList.get(position);
+
+                //getting the contact information corresponding to the name
+                IndividualContact target = contacts.get(message);
+                intent.putExtra("name", target.name);
+                intent.putExtra("email", target.email);
+                intent.putExtra("phone", target.phone);
+                intent.putExtra("image", target.image.toString());
+                intent.putExtra("lastContact", target.lastContact);
+                intent.putExtra("note", target.note);
+
+                //pass information into activity
+                startActivity(intent);
+            }
+        });
+    }
+
 
     /**
      * Method to determine events when add button is clicked
@@ -86,13 +117,28 @@ public class MainContactScreen extends AppCompatActivity {
             // If the result code matches
             if (resultCode == RESULT_OK) {
 
-                // Get the name, email, phone data from the IndividualContactActivity class
+                // Get the name, email, phone data, last contact, note and image from the IndividualContactActivity class
                 String name = data.getStringExtra(IndividualContactActivity.NAME_TEXT);
                 String email = data.getStringExtra(IndividualContactActivity.EMAIL_TEXT);
                 String phone = data.getStringExtra(IndividualContactActivity.PHONE_TEXT);
+                Uri image;
+                if (data.hasExtra(IndividualContactActivity.IMAGE_TEXT)) {
+                    image = data.getParcelableExtra(IndividualContactActivity.IMAGE_TEXT);
+                    imageArray.add(image);
+                }
+                else {
+                    imageArray.add(original);
+                    image = original;
+                }
+                String note = data.getStringExtra(IndividualContactActivity.NOTE_TEXT);
 
-                // Change the ArrayAdapter and display
-                values.add(name + "  " + email + "  " + phone);
+                //create new contact with given information
+                IndividualContact contact1 = new IndividualContact(name, email, phone, "2212", note, image);
+                //add contact to contactList HashMap with key = name and value = the contact
+                contacts.put(name, contact1);
+                //update name in name array
+                nameList.add(name);
+                //notify adapter
                 adapter.notifyDataSetChanged();
             }
         }
