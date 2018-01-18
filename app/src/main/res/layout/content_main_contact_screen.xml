@@ -8,16 +8,24 @@
     tools:context="com.example.demouser.bond.MainContactScreen"
     tools:showIn="@layout/activity_main_contact_screen">
 
-    <ListView
-        android:id="@+id/contactList"
-        android:layout_width="wrap_content"
-        android:layout_height="423dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <ListView
+            android:id="@+id/contactList"
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="3dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/button"
