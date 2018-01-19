@@ -16,19 +16,43 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/save" />
+        app:srcCompat="@drawable/octopus"
+        android:src="@android:color/transparent"
+         />
+
+    <TextView
+        android:id="@+id/saveText"
+        android:layout_width="39dp"
+        android:layout_height="26dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="6dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:elevation="16dp"
+        android:text="Save"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="507dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -228,17 +252,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/noteLabel1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Note"
-                android:textSize="18sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/noteLabel1"
-                app:layout_constraintEnd_toStartOf="@+id/noteLabel1"
-                app:layout_constraintHorizontal_bias="0.424"
-                app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:id="@+id/noteLabel1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Note"
+                    android:textSize="18sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/noteLabel1"
+                    app:layout_constraintEnd_toStartOf="@+id/noteLabel1"
+                    app:layout_constraintHorizontal_bias="0.424"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <EditText
                     android:id="@+id/note"
@@ -250,7 +274,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="textCapSentences|textMultiLine"
-                    android:maxLength ="2000"
+                    android:maxLength="2000"
                     android:scrollHorizontally="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
