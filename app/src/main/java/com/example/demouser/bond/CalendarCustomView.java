@@ -62,7 +62,6 @@ public class CalendarCustomView extends LinearLayout{
         currentDate = (TextView)view.findViewById(R.id.display_current_date);
         addEventButton = (Button)view.findViewById(R.id.add_calendar_event);
         calendarGridView = (GridView)view.findViewById(R.id.calendar_grid);
-//        mAdapter =;
     }
     private void setPreviousButtonClickEvent(){
         previousButton.setOnClickListener(new OnClickListener() {
@@ -94,8 +93,6 @@ public class CalendarCustomView extends LinearLayout{
 
     private void setUpCalendarAdapter(){
         List<Date> dayValueInCells = new ArrayList<Date>();
-       // mQuery = new DatabaseQuery(context);
-       // List<EventObjects> mEvents = mQuery.getAllFutureEvents();
         List<EventObjects> mEvents = new ArrayList<>();
 
         Calendar cal2 = Calendar.getInstance(Locale.ENGLISH);
@@ -112,7 +109,6 @@ public class CalendarCustomView extends LinearLayout{
             dayValueInCells.add(mCal.getTime());
             mCal.add(Calendar.DAY_OF_MONTH, 1);
         }
-        //Log.d(TAG, "Number of date " + dayValueInCells.size());
         String sDate = formatter.format(cal.getTime());
         currentDate.setText(sDate);
 
