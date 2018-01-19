@@ -11,7 +11,7 @@ public class DatabaseObject {
     private static Database dbHelper;
     private SQLiteDatabase db;
     public DatabaseObject(Context context) {
-        dbHelper = new Database(context);
+       // dbHelper = new Database(context);
         //this.dbHelper.getWritableDatabase();
         //this.db = dbHelper.getReadableDatabase();
     }

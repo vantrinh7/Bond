@@ -1,5 +1,6 @@
 package com.example.demouser.bond;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -21,7 +22,7 @@ import java.util.Locale;
 
 public class CalendarCustomView extends LinearLayout{
     private static final String TAG = CalendarCustomView.class.getSimpleName();
-    private ImageView previousButton, nextButton;
+    private Button previousButton, nextButton;
     private TextView currentDate;
     private GridView calendarGridView;
     private Button addEventButton;
@@ -35,6 +36,7 @@ public class CalendarCustomView extends LinearLayout{
     public CalendarCustomView(Context context) {
         super(context);
     }
+
     public CalendarCustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
@@ -55,8 +57,8 @@ public class CalendarCustomView extends LinearLayout{
     private void initializeUILayout(){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.calendar_layout, this);
-        previousButton = (ImageView)view.findViewById(R.id.previous_month);
-        nextButton = (ImageView)view.findViewById(R.id.next_month);
+        previousButton = (Button) view.findViewById(R.id.previous_month);
+        nextButton = (Button) view.findViewById(R.id.next_month);
         currentDate = (TextView)view.findViewById(R.id.display_current_date);
         addEventButton = (Button)view.findViewById(R.id.add_calendar_event);
         calendarGridView = (GridView)view.findViewById(R.id.calendar_grid);
@@ -88,21 +90,33 @@ public class CalendarCustomView extends LinearLayout{
             }
         });
     }
+
+
     private void setUpCalendarAdapter(){
         List<Date> dayValueInCells = new ArrayList<Date>();
-        mQuery = new DatabaseQuery(context);
-        List<EventObjects> mEvents = mQuery.getAllFutureEvents();
+       // mQuery = new DatabaseQuery(context);
+       // List<EventObjects> mEvents = mQuery.getAllFutureEvents();
+        List<EventObjects> mEvents = new ArrayList<>();
+
+        Calendar cal2 = Calendar.getInstance(Locale.ENGLISH);
+        cal2.set(2018, Calendar.JANUARY, 20);
+        Date testDate = cal2.getTime();
+
+
         Calendar mCal = (Calendar)cal.clone();
         mCal.set(Calendar.DAY_OF_MONTH, 1);
         int firstDayOfTheMonth = mCal.get(Calendar.DAY_OF_WEEK) - 1;
+
         mCal.add(Calendar.DAY_OF_MONTH, -firstDayOfTheMonth);
         while(dayValueInCells.size() < MAX_CALENDAR_COLUMN){
             dayValueInCells.add(mCal.getTime());
             mCal.add(Calendar.DAY_OF_MONTH, 1);
         }
-        Log.d(TAG, "Number of date " + dayValueInCells.size());
+        //Log.d(TAG, "Number of date " + dayValueInCells.size());
         String sDate = formatter.format(cal.getTime());
         currentDate.setText(sDate);
+
+        mEvents.add(new EventObjects("Call mum", testDate));
         mAdapter = new GridAdapter(context, dayValueInCells, cal, mEvents);
         calendarGridView.setAdapter(mAdapter);
     }

@@ -1,18 +1,25 @@
 package com.example.demouser.bond;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.net.Uri;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +55,15 @@ public class MainContactScreen extends AppCompatActivity {
         });
         //set up contact list view
         setupContactList();
+
+        Button calendar = (Button) findViewById(R.id.calendar);
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainContactScreen.this, CalendarMainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -83,11 +99,6 @@ public class MainContactScreen extends AppCompatActivity {
     }
 
 
-    public void initiateCalendarButton(){
-        Intent intent = new Intent(this, CalendarMainActivity.class);
-
-        startActivity(intent);
-    }
     /**
      * Method to determine events when add button is clicked
      */
@@ -125,7 +136,7 @@ public class MainContactScreen extends AppCompatActivity {
                 if (data.hasExtra(IndividualContactActivity.IMAGE_TEXT)) {
                     String image = data.getStringExtra(IndividualContactActivity.IMAGE_TEXT);
                     imageUri = Uri.parse(image);
-                    System.out.println("Uri is: " + imageUri);
+                    //System.out.println("Uri is: " + image)
                     imageArray.add(imageUri);
                 }
                 else {

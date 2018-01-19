@@ -21,8 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".IndividualContactActivity" />
-        <activity android:name=".CalendarMainActivity"></activity>
+
+        <activity android:name=".CalendarMainActivity"
+            android:parentActivityName=".MainContactScreen"></activity>
+        <activity android:name=".IndividualContactPage"
+            android:parentActivityName=".MainContactScreen"/>
     </application>
 
 </manifest>
