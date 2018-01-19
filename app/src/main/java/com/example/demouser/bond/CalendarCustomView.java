@@ -1,6 +1,5 @@
 package com.example.demouser.bond;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;

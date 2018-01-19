@@ -22,12 +22,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".IndividualContactActivity" />
+        <activity android:name=".IndividualContactActivity"
+            android:windowSoftInputMode="adjustPan"/>
 
         <activity android:name=".CalendarMainActivity"
-            android:parentActivityName=".MainContactScreen"></activity>
+            android:parentActivityName=".MainContactScreen"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".IndividualContactPage"
-            android:parentActivityName=".MainContactScreen"/>
+            android:parentActivityName=".MainContactScreen"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

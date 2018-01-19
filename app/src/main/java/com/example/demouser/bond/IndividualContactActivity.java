@@ -1,9 +1,15 @@
 package com.example.demouser.bond;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +17,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
+
+import java.text.DateFormat;
+import java.util.Calendar;
 
 public class IndividualContactActivity extends AppCompatActivity {
     public static final String NAME_TEXT = "com.example.demouser.bond.NAME_TEXT";
@@ -83,8 +93,6 @@ public class IndividualContactActivity extends AppCompatActivity {
                     intent.putExtra(IMAGE_TEXT, imageSrc);
                 }
 
-
-
                 // Set the result to be the intent just created
                 setResult(RESULT_OK, intent);
                 finish();
@@ -120,5 +128,4 @@ public class IndividualContactActivity extends AppCompatActivity {
         }
 
     }
-
 }
