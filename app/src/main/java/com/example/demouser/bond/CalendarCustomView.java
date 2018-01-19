@@ -176,4 +176,5 @@ public class CalendarCustomView extends LinearLayout{
         mAdapter = new GridAdapter(context, dayValueInCells, cal, mEvents);
         calendarGridView.setAdapter(mAdapter);
     }
+    //
 }
