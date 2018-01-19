@@ -104,7 +104,7 @@ public class IndividualContactActivity extends AppCompatActivity {
      */
     public void handleSaveButton() {
         // Find the save button
-        FloatingActionButton saveButton = findViewById(R.id.saveButton);
+        FloatingActionButton saveButton = findViewById(R.id.button);
 
         // Add click listener and determine events after click
         saveButton.setOnClickListener(new View.OnClickListener() {
