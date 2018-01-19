@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:windowSoftInputMode="adjustPan"
             android:name=".MainContactScreen"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
@@ -21,8 +22,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".IndividualContactActivity" />
-        <activity android:name=".CalendarMainActivity"></activity>
+        <activity
+            android:name=".IndividualContactActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".IndividualContactPage"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".CalendarMainActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>
