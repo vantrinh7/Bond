@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class MainContactScreen extends AppCompatActivity {
@@ -68,6 +69,8 @@ public class MainContactScreen extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Date date = new DatePickerFragment().getDate();
     }
 
     /**

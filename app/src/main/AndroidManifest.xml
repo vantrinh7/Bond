@@ -27,7 +27,7 @@
 
         <activity android:name=".CalendarMainActivity"
             android:parentActivityName=".MainContactScreen"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".IndividualContactPage"
             android:parentActivityName=".MainContactScreen"
             android:windowSoftInputMode="adjustPan"/>

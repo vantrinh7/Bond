@@ -144,8 +144,6 @@ public class CalendarCustomView extends LinearLayout{
 
     private void setUpCalendarAdapter(){
         List<Date> dayValueInCells = new ArrayList<Date>();
-       // mQuery = new DatabaseQuery(context);
-       // List<EventObjects> mEvents = mQuery.getAllFutureEvents();
         List<EventObjects> mEvents = new ArrayList<>();
 
         Calendar cal2 = Calendar.getInstance(Locale.ENGLISH);
