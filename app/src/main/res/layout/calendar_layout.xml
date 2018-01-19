@@ -11,13 +11,16 @@
         android:paddingBottom="8dp"
         android:background="@color/colorAccent"
         android:orientation="horizontal">
-        <ImageView
+
+        <Button
             android:id="@+id/previous_month"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:contentDescription="@string/app_name"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:text="PREVIOUS"
+            android:textColor="@color/colorWhite" />
+
         <TextView
             android:id="@+id/display_current_date"
             android:layout_width="0dp"
@@ -28,13 +31,16 @@
             android:layout_marginTop="4dp"
             android:textStyle="bold"
             android:layout_weight="3"/>
-        <ImageView
+
+        <Button
             android:id="@+id/next_month"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:contentDescription="@string/app_name"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@color/colorAccent"
+            android:text="NEXT"
+            android:textColor="@color/colorWhite" />
+
     </LinearLayout>
     <Button
         android:id="@+id/add_calendar_event"
