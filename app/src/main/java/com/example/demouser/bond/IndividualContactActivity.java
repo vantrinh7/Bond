@@ -59,7 +59,7 @@ public class IndividualContactActivity extends AppCompatActivity {
      */
     public void handleSaveButton (){
         // Find the save button
-        FloatingActionButton saveButton = (FloatingActionButton) findViewById(R.id.button);
+        FloatingActionButton saveButton = findViewById(R.id.saveButton);
 
         // Add click listener and determine events after click
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +78,6 @@ public class IndividualContactActivity extends AppCompatActivity {
                 EditText noteText = (EditText) findViewById(R.id.note);
                 String note = noteText.getText().toString();
 
-
                 // Create a new intent to hold each data
                 Intent intent = new Intent();
 
@@ -88,6 +87,7 @@ public class IndividualContactActivity extends AppCompatActivity {
                 intent.putExtra(PHONE_TEXT, phone);
                 intent.putExtra(DATE_TEXT, 2212);
                 intent.putExtra(NOTE_TEXT, note);
+
                 //if user added a new image then save the source of that image
                 if (!imageSrc.equals("")) {
                     intent.putExtra(IMAGE_TEXT, imageSrc);
@@ -127,5 +127,30 @@ public class IndividualContactActivity extends AppCompatActivity {
             imageSrc = selectedImage.toString();
         }
 
+    }
+
+    public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle saveInstanceState) {
+            // Use the current time as the default values for the picker
+            final Calendar calendar = Calendar.getInstance();
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            int minute = calendar.get(Calendar.MINUTE);
+
+            // Return a new instance of TimePickerDialog
+            // 1st parameter - the context, 2nd - onTimeSetListener, 3rd - hour, 4th - minute, 5th - boolean, 6 - is24HourFormat
+            return new TimePickerDialog(getActivity(), this, hour, minute, android.text.format.DateFormat.is24HourFormat(getActivity()));
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        @Override
+        public void onTimeSet(TimePicker timePicker, int i, int i1) {
+            // When user hit set time, change the text view and save the time instance
+            int hour = timePicker.getHour();
+            int minute = timePicker.getMinute();
+
+
+        }
     }
 }

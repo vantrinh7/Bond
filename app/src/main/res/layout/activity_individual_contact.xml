@@ -8,13 +8,16 @@
 
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/button"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginTop="432dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/save" />
 
@@ -191,18 +194,26 @@
                     android:text="Set Next Contact" />
 
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/nextDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Button" />
+                    android:background="#00FF0000"
+                    android:text="nextDate"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="18dp" />
 
                 <Button
-                    android:id="@+id/button5"
+                    android:id="@+id/nextTime"
                     android:layout_width="59dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Button" />
+                    android:background="#00FF0000"
+                    android:text="nextTime"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="18dp" />
             </LinearLayout>
 
             <LinearLayout
