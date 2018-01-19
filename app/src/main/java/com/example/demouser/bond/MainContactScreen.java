@@ -1,32 +1,20 @@
 package com.example.demouser.bond;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.view.View;
-import android.net.Uri;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 public class MainContactScreen extends AppCompatActivity {
@@ -70,7 +58,13 @@ public class MainContactScreen extends AppCompatActivity {
             }
         });
 
-        Date date = new DatePickerFragment().getDate();
+        Button template = (Button) findViewById(R.id.template);
+        template.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initiateTemplateButton();
+            }
+        });
     }
 
     /**
@@ -118,6 +112,16 @@ public class MainContactScreen extends AppCompatActivity {
         // Must implement onActivityResult() method below to denote what happens when result comes back
         // First parameter - the new intent, second parameter - the code that identifies where the result comes from
         startActivityForResult(intent, REQUEST_CODE_INDIVIDUAL_CONTACT_ACTIVITY);
+    }
+
+    public void initiateTemplateButton(){
+
+        Intent intent = new Intent(this, TemplateMainActivity.class);
+
+        // Use startActivity() to simply start a new screen, use startActivityForResult() to get some results back.
+        // Must implement onActivityResult() method below to denote what happens when result comes back
+        // First parameter - the new intent, second parameter - the code that identifies where the result comes from
+        startActivity(intent);
     }
 
     /**
