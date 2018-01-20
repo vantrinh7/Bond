@@ -25,9 +25,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 public class MainContactScreen extends AppCompatActivity {
 
@@ -36,7 +40,11 @@ public class MainContactScreen extends AppCompatActivity {
     private String m_Text = "";
     private ArrayList<String> nameList = new ArrayList<>();
     private ArrayList<Uri> imageArray = new ArrayList<> ();
-    private HashMap<String, IndividualContact> contacts = new HashMap<> ();
+    public HashMap<String, IndividualContact> contacts = new HashMap<> ();
+    public static HashMap<String, EventObjects> eventList = new HashMap<>();
+    public static List<EventObjects> mEvents = new ArrayList<>();
+    private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
+    private SimpleDateFormat dayFormatter = new SimpleDateFormat("dd", Locale.ENGLISH);
     private CustomListAdapter adapter;
     private ListView contactList;
     private final Uri original = Uri.parse("android.resource://com.example.demouser.bond/drawable/octopus");
@@ -70,7 +78,7 @@ public class MainContactScreen extends AppCompatActivity {
             }
         });
 
-        Date date = new DatePickerFragment().getDate();
+        //Date date = new DatePickerFragment().getDate();
     }
 
     /**
@@ -139,7 +147,10 @@ public class MainContactScreen extends AppCompatActivity {
                 String name = data.getStringExtra(IndividualContactActivity.NAME_TEXT);
                 String email = data.getStringExtra(IndividualContactActivity.EMAIL_TEXT);
                 String phone = data.getStringExtra(IndividualContactActivity.PHONE_TEXT);
+                String date = data.getStringExtra(IndividualContactActivity.DATE_TEXT);
                 Uri imageUri = original;
+
+                //Set profile photo
                 if (data.hasExtra(IndividualContactActivity.IMAGE_TEXT)) {
                     String image = data.getStringExtra(IndividualContactActivity.IMAGE_TEXT);
                     imageUri = Uri.parse(image);
@@ -151,10 +162,24 @@ public class MainContactScreen extends AppCompatActivity {
                 }
                 String note = data.getStringExtra(IndividualContactActivity.NOTE_TEXT);
 
+                //parse String date into Date object
+                SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy");
+                Date d = null;
+                try {
+                    d = sdf.parse(date);
+
+                } catch (ParseException ex) {
+                    System.out.println("parse failed");
+                }
+
                 //create new contact with given information
-                IndividualContact contact1 = new IndividualContact(name, email, phone, "2212", note, imageUri);
+                IndividualContact contact1 = new IndividualContact(name, email, phone, "2212", d, note, imageUri);
+                EventObjects event = new EventObjects("Contact " + name, d);
                 //add contact to contactList HashMap with key = name and value = the contact
                 contacts.put(name, contact1);
+                //add events to Hashmap + ArrayList
+                eventList.put(dayFormatter.format(d) + formatter.format(d), event);
+                mEvents.add(event);
                 //update name in name array
                 nameList.add(name);
                 //notify adapter

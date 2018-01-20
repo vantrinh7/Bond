@@ -26,11 +26,16 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Logger;
 
 public class IndividualContactActivity extends AppCompatActivity {
     public static final String NAME_TEXT = "com.example.demouser.bond.NAME_TEXT";
@@ -42,7 +47,10 @@ public class IndividualContactActivity extends AppCompatActivity {
     protected String imageSrc = "";
     private Button nextTime;
     private Button nextDate;
+    public Date setDate;
+    private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
     private static int RESULT_LOAD_IMAGE = 1;
+
 
 
     @Override
@@ -123,6 +131,8 @@ public class IndividualContactActivity extends AppCompatActivity {
                 EditText noteText = (EditText) findViewById(R.id.note);
                 String note = noteText.getText().toString();
 
+                String dateSet = nextDate.getText().toString();
+
                 // Create a new intent to hold each data
                 Intent intent = new Intent();
 
@@ -130,8 +140,9 @@ public class IndividualContactActivity extends AppCompatActivity {
                 intent.putExtra(NAME_TEXT, name);
                 intent.putExtra(EMAIL_TEXT, email);
                 intent.putExtra(PHONE_TEXT, phone);
-                intent.putExtra(DATE_TEXT, 2212);
+                intent.putExtra(DATE_TEXT, dateSet);
                 intent.putExtra(NOTE_TEXT, note);
+
 
                 //if user added a new image then save the source of that image
                 if (!imageSrc.equals("")) {
@@ -186,6 +197,7 @@ public class IndividualContactActivity extends AppCompatActivity {
                 DialogFragment newFragment = new DatePickerFragment();
                 newFragment.show(getFragmentManager(), "Date picker");
                 Log.d("My activity", "Called new Fragment");
+                //System.out.println("dis the date: " + dateFormat.format(newFragment.getDate()));
             }
         });
     }

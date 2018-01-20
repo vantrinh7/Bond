@@ -36,7 +36,7 @@ public class CalendarCustomView extends LinearLayout{
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private GridAdapter mAdapter;
-    private HashMap<String, EventObjects> eventList = new HashMap<>();
+    //private HashMap<String, EventObjects> eventList = new HashMap<>();
     private String sDate;
     private String sMonth;
 
@@ -92,9 +92,7 @@ public class CalendarCustomView extends LinearLayout{
     /** Method to check if there is an event on a given date */
     private boolean hasEventCheck (String day) {
         //check if there is a event with that day + if the month and year are the same
-        //if (eventList.containsKey(day) && sDate.equals(formatter.format(eventList.get(day).getDate()))) {
-        System.out.println("Checking event: " + day + currentDate.getText().toString());
-        if (eventList.containsKey(day + currentDate.getText().toString())){
+        if (MainContactScreen.eventList.containsKey(day + currentDate.getText().toString())){
             return true;
         }
         return false;
@@ -108,10 +106,8 @@ public class CalendarCustomView extends LinearLayout{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //checks if the position is a date with an event
                 //if it is then do all this shit
-                //ClipData.Item selected = (ClipData.Item) parent.getItemAtPosition(position);
                 TextView day = (TextView) view.findViewById(R.id.calendar_date_id);
                 String dayNumber = (String) day.getText();
-                System.out.println("Clicked on day is: " + dayNumber);
 
                 if (hasEventCheck(dayNumber)) {
                     // custom dialog
@@ -121,10 +117,7 @@ public class CalendarCustomView extends LinearLayout{
 
                     // set the custom dialog components - text, image and button
                     TextView text = (TextView) dialog.findViewById(R.id.text);
-                    text.setText("Message: " + eventList.get(dayNumber + currentDate.getText().toString()).getMessage());
-
-//                ImageView image = (ImageView) dialog.findViewById(R.id.image);
-//                image.setImageResource(R.drawable.ic_launcher);
+                    text.setText(MainContactScreen.eventList.get(dayNumber + currentDate.getText().toString()).getMessage());
 
                     Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
                     // if button is clicked, close the custom dialog
@@ -144,18 +137,6 @@ public class CalendarCustomView extends LinearLayout{
 
     private void setUpCalendarAdapter(){
         List<Date> dayValueInCells = new ArrayList<Date>();
-        List<EventObjects> mEvents = new ArrayList<>();
-
-        Calendar cal2 = Calendar.getInstance(Locale.ENGLISH);
-        cal2.set(2018, Calendar.JANUARY, 20);
-        Date testDate = cal2.getTime();
-        EventObjects testEvent = new EventObjects("Call mum", testDate);
-        eventList.put(20 + formatter.format(testDate), testEvent);
-
-        cal2.set(2018, Calendar.FEBRUARY, 20);
-        Date testDate2 = cal2.getTime();
-        EventObjects testEvent2 = new EventObjects("Take my dog to the gym", testDate2);
-        eventList.put(20 + formatter.format(testDate2), testEvent2);
 
         Calendar mCal = (Calendar)cal.clone();
         mCal.set(Calendar.DAY_OF_MONTH, 1);
@@ -170,11 +151,7 @@ public class CalendarCustomView extends LinearLayout{
         sMonth = monthFormat.format(cal.getTime());
         currentDate.setText(sDate);
 
-        mEvents.add(testEvent);
-        mEvents.add(testEvent2);
-        System.out.println("Event 2 is: " + 20 + formatter.format(testDate2));
-        mAdapter = new GridAdapter(context, dayValueInCells, cal, mEvents);
+        mAdapter = new GridAdapter(context, dayValueInCells, cal, MainContactScreen.mEvents);
         calendarGridView.setAdapter(mAdapter);
     }
-    //
 }
