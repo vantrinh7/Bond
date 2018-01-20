@@ -50,7 +50,7 @@ public class MainContactScreen extends AppCompatActivity {
     public static final int REQUEST_CODE_INDIVIDUAL_CONTACT_ACTIVITY = 0;
 
     private static ArrayList<String> nameList = new ArrayList<>();
-    private static ArrayList<Uri> imageArray = new ArrayList<> ();
+    private static ArrayList<Uri> imageArray = new ArrayList<>();
     public HashMap<String, IndividualContact> contacts = new HashMap<> ();
     public static HashMap<String, EventObjects> eventList = new HashMap<>();
     public static List<EventObjects> mEvents = new ArrayList<>();
@@ -59,6 +59,7 @@ public class MainContactScreen extends AppCompatActivity {
     private CustomListAdapter adapter;
     private ListView contactList;
     private final Uri original = Uri.parse("android.resource://com.example.demouser.bond/drawable/octopus");
+    private SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy");
 
 
     /**
@@ -163,6 +164,20 @@ public class MainContactScreen extends AppCompatActivity {
     }
 
     /**
+     * Method to parse a String into a Date object
+     */
+    protected Date parseStringtoDate (String src) {
+        Date d = null;
+        try {
+            d = sdf.parse(src);
+
+        } catch (ParseException ex) {
+            System.out.println("parse failed");
+        }
+        return d;
+    }
+
+    /**
      * Method that determines what happens when result comes back from the child activity
      * @param requestCode supplied by startActivityForResult(), it identifies who this result came from
      * @param resultCode  the integer result code returned by the child activity through its setResult()
@@ -182,37 +197,31 @@ public class MainContactScreen extends AppCompatActivity {
                 String email = data.getStringExtra(IndividualContactActivity.EMAIL_TEXT);
                 String phone = data.getStringExtra(IndividualContactActivity.PHONE_TEXT);
                 String date = data.getStringExtra(IndividualContactActivity.DATE_TEXT);
+                String note = data.getStringExtra(IndividualContactActivity.NOTE_TEXT);
                 Uri imageUri = original;
 
                 //Set profile photo
                 if (data.hasExtra(IndividualContactActivity.IMAGE_TEXT)) {
                     String image = data.getStringExtra(IndividualContactActivity.IMAGE_TEXT);
                     imageUri = Uri.parse(image);
-                    //System.out.println("Uri is: " + image)
                     imageArray.add(imageUri);
                 } else {
                     imageArray.add(original);
                 }
-                String note = data.getStringExtra(IndividualContactActivity.NOTE_TEXT);
-
-                //parse String date into Date object
-                SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy");
-                Date d = null;
-                try {
-                    d = sdf.parse(date);
-
-                } catch (ParseException ex) {
-                    System.out.println("parse failed");
-                }
 
                 //create new contact with given information
                 IndividualContact contact1 = new IndividualContact(name, email, phone, "2212", date, note, imageUri);
-                EventObjects event = new EventObjects("Contact " + name, d);
                 //add contact to contactList HashMap with key = name and value = the contact
                 contacts.put(name, contact1);
-                //add events to Hashmap + ArrayList
-                eventList.put(dayFormatter.format(d) + formatter.format(d), event);
-                mEvents.add(event);
+
+                //parse String date into Date object
+                Date d = parseStringtoDate(date);
+                if (d != null) {
+                    EventObjects event = new EventObjects("Contact " + name, d);
+                    //add events to HashMap + ArrayList
+                    eventList.put(dayFormatter.format(d) + formatter.format(d), event);
+                    mEvents.add(event);
+                }
                 //update name in name array
                 nameList.add(name);
                 //notify adapter

@@ -1,27 +1,21 @@
 package com.example.demouser.bond;
 
 import android.app.Dialog;
-import android.content.ClipData;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-//
 
 public class CalendarCustomView extends LinearLayout{
     private static final String TAG = CalendarCustomView.class.getSimpleName();
@@ -36,9 +30,7 @@ public class CalendarCustomView extends LinearLayout{
     private Calendar cal = Calendar.getInstance(Locale.ENGLISH);
     private Context context;
     private GridAdapter mAdapter;
-    //private HashMap<String, EventObjects> eventList = new HashMap<>();
     private String sDate;
-    private String sMonth;
 
     public CalendarCustomView(Context context) {
         super(context);
@@ -52,9 +44,6 @@ public class CalendarCustomView extends LinearLayout{
         setPreviousButtonClickEvent();
         setNextButtonClickEvent();
         setGridCellClickEvents();
-        Log.d(TAG, "I need to call this method");
-
-
     }
     public CalendarCustomView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -112,7 +101,7 @@ public class CalendarCustomView extends LinearLayout{
                     // custom dialog
                     final Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.calendar_popup);
-                    dialog.setTitle("Event");
+                    dialog.setTitle("Keep in touch");
 
                     // set the custom dialog components - text, image and button
                     TextView text = (TextView) dialog.findViewById(R.id.text);
@@ -147,7 +136,6 @@ public class CalendarCustomView extends LinearLayout{
             mCal.add(Calendar.DAY_OF_MONTH, 1);
         }
         sDate = formatter.format(cal.getTime());
-        sMonth = monthFormat.format(cal.getTime());
         currentDate.setText(sDate);
 
         mAdapter = new GridAdapter(context, dayValueInCells, cal, MainContactScreen.mEvents);

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 /**
  * Page for displaying information of a single contact
+ * Author: Olive.
  */
 public class IndividualContactPage extends AppCompatActivity {
 

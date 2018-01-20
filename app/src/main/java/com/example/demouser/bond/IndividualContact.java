@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * Created by Olive on 1/16/18.
+ * Class to store each contact's info.
  */
 
 
@@ -15,9 +16,8 @@ public class IndividualContact {
     protected String phone;
     protected String lastContact;
     protected String note;
-    protected Uri image;
     protected String nextContact;
-
+    protected Uri image;
 
     public IndividualContact (String name, String email, String phone, String lastContact, String nextContact, String note, Uri image) {
         this.name = name;
