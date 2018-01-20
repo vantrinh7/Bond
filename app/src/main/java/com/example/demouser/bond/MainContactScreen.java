@@ -49,9 +49,8 @@ public class MainContactScreen extends AppCompatActivity {
 
     public static final int REQUEST_CODE_INDIVIDUAL_CONTACT_ACTIVITY = 0;
 
-    private String m_Text = "";
-    private ArrayList<String> nameList = new ArrayList<>();
-    private ArrayList<Uri> imageArray = new ArrayList<> ();
+    private static ArrayList<String> nameList = new ArrayList<>();
+    private static ArrayList<Uri> imageArray = new ArrayList<> ();
     public HashMap<String, IndividualContact> contacts = new HashMap<> ();
     public static HashMap<String, EventObjects> eventList = new HashMap<>();
     public static List<EventObjects> mEvents = new ArrayList<>();
@@ -62,6 +61,10 @@ public class MainContactScreen extends AppCompatActivity {
     private final Uri original = Uri.parse("android.resource://com.example.demouser.bond/drawable/octopus");
 
 
+    /**
+     * Method called on startup
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +128,7 @@ public class MainContactScreen extends AppCompatActivity {
                 intent.putExtra("phone", target.phone);
                 intent.putExtra("image", target.image.toString());
                 intent.putExtra("lastContact", target.lastContact);
+                intent.putExtra("nextContact", target.nextContact);
                 intent.putExtra("note", target.note);
 
                 //pass information into activity
@@ -202,7 +206,7 @@ public class MainContactScreen extends AppCompatActivity {
                 }
 
                 //create new contact with given information
-                IndividualContact contact1 = new IndividualContact(name, email, phone, "2212", d, note, imageUri);
+                IndividualContact contact1 = new IndividualContact(name, email, phone, "2212", date, note, imageUri);
                 EventObjects event = new EventObjects("Contact " + name, d);
                 //add contact to contactList HashMap with key = name and value = the contact
                 contacts.put(name, contact1);

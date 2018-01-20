@@ -16,10 +16,10 @@ public class IndividualContact {
     protected String lastContact;
     protected String note;
     protected Uri image;
-    protected Date nextContact;
+    protected String nextContact;
 
 
-    public IndividualContact (String name, String email, String phone, String lastContact, Date nextContact, String note, Uri image) {
+    public IndividualContact (String name, String email, String phone, String lastContact, String nextContact, String note, Uri image) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -27,6 +27,5 @@ public class IndividualContact {
         this.image = image;
         this.note = note;
         this.nextContact = nextContact;
-        //
     }
 }

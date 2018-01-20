@@ -26,6 +26,7 @@ public class IndividualContactPage extends AppCompatActivity {
         TextView email = (TextView) findViewById(R.id.email);
         TextView lastContact = (TextView) findViewById(R.id.lastContact);
         TextView note = (TextView) findViewById(R.id.note);
+        TextView nextContact = (TextView) findViewById(R.id.nextContact);
         ImageView profile = (ImageView) findViewById(R.id.profilePic);
 
         //set information according to the information in intent
@@ -33,6 +34,7 @@ public class IndividualContactPage extends AppCompatActivity {
         phone.setText(getIntent().getStringExtra("phone"));
         email.setText(getIntent().getStringExtra("email"));
         lastContact.setText(getIntent().getStringExtra("lastContact"));
+        nextContact.setText(getIntent().getStringExtra("nextContact"));
         note.setText(getIntent().getStringExtra("note"));
 
         //set image source from image in intent
