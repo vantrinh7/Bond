@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.demouser.bond">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -21,16 +21,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".IndividualContactActivity"
-            android:windowSoftInputMode="adjustPan"/>
-
-        <activity android:name=".CalendarMainActivity"
+        <activity
+            android:name=".IndividualContactActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".CalendarMainActivity"
             android:parentActivityName=".MainContactScreen"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".IndividualContactPage"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".IndividualContactPage"
             android:parentActivityName=".MainContactScreen"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".TemplateMainActivity"></activity>
     </application>
 
 </manifest>

@@ -82,6 +82,14 @@ public class MainContactScreen extends AppCompatActivity {
             }
         });
 
+        Button template = (Button) findViewById(R.id.template);
+        template.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initiateTemplateButton();
+            }
+        });
+
         handleTestNotiButton();
     }
 
@@ -132,9 +140,18 @@ public class MainContactScreen extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE_INDIVIDUAL_CONTACT_ACTIVITY);
     }
 
+    public void initiateTemplateButton(){
+
+        Intent intent = new Intent(this, TemplateMainActivity.class);
+
+        // Use startActivity() to simply start a new screen, use startActivityForResult() to get some results back.
+        // Must implement onActivityResult() method below to denote what happens when result comes back
+        // First parameter - the new intent, second parameter - the code that identifies where the result comes from
+        startActivity(intent);
+    }
+
     /**
      * Method that determines what happens when result comes back from the child activity
-     *
      * @param requestCode supplied by startActivityForResult(), it identifies who this result came from
      * @param resultCode  the integer result code returned by the child activity through its setResult()
      * @param data        an intent that holds the data to be returned
@@ -260,6 +277,7 @@ public class MainContactScreen extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }
