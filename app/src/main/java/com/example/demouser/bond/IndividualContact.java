@@ -27,5 +27,6 @@ public class IndividualContact {
         this.image = image;
         this.note = note;
         this.nextContact = nextContact;
+        //
     }
 }
