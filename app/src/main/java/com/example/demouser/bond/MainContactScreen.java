@@ -1,11 +1,22 @@
 package com.example.demouser.bond;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +38,7 @@ import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -78,13 +90,21 @@ public class MainContactScreen extends AppCompatActivity {
             }
         });
 
-        //Date date = new DatePickerFragment().getDate();
+        Button template = (Button) findViewById(R.id.template);
+        template.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initiateTemplateButton();
+            }
+        });
+
+        handleTestNotiButton();
     }
 
     /**
      * Method to set up the contact list view
      */
-    public void setupContactList () {
+    public void setupContactList() {
         //create and add adapter to ListView to display contacts
         adapter = new CustomListAdapter(this, nameList, imageArray);
         contactList = (ListView) findViewById(R.id.contactList);
@@ -128,11 +148,21 @@ public class MainContactScreen extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CODE_INDIVIDUAL_CONTACT_ACTIVITY);
     }
 
+    public void initiateTemplateButton(){
+
+        Intent intent = new Intent(this, TemplateMainActivity.class);
+
+        // Use startActivity() to simply start a new screen, use startActivityForResult() to get some results back.
+        // Must implement onActivityResult() method below to denote what happens when result comes back
+        // First parameter - the new intent, second parameter - the code that identifies where the result comes from
+        startActivity(intent);
+    }
+
     /**
      * Method that determines what happens when result comes back from the child activity
      * @param requestCode supplied by startActivityForResult(), it identifies who this result came from
-     * @param resultCode the integer result code returned by the child activity through its setResult()
-     * @param data an intent that holds the data to be returned
+     * @param resultCode  the integer result code returned by the child activity through its setResult()
+     * @param data        an intent that holds the data to be returned
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -156,8 +186,7 @@ public class MainContactScreen extends AppCompatActivity {
                     imageUri = Uri.parse(image);
                     //System.out.println("Uri is: " + image)
                     imageArray.add(imageUri);
-                }
-                else {
+                } else {
                     imageArray.add(original);
                 }
                 String note = data.getStringExtra(IndividualContactActivity.NOTE_TEXT);
@@ -186,6 +215,72 @@ public class MainContactScreen extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         }
+    }
+
+    public void handleTestNotiButton() {
+        Button button = findViewById(R.id.button3);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    sendNotifications();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Method to send notifications when invoked
+     */
+    public void sendNotifications() throws IOException {
+        // Create a notification manager that manages different channels
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // The id of the channel.
+        String id = "my_channel_01";
+
+        //Now build notification. For Android 8.0 (API level 26) and higher, a Notification channel is required.
+        //But we don't need it for our app since its minimum API level is 21
+        NotificationCompat.Builder nBuilder =
+                new NotificationCompat.Builder(this, id)
+                        .setSmallIcon(R.drawable.octopus)
+                        .setContentTitle("This notification title is from Bond")
+                        .setContentText("Keep in touch");
+
+        // When user clicks on the notification, come back to the program
+        Intent resultIntent = new Intent(this, MainContactScreen.class);
+
+        // The stack builder object will contain an artificial back stack for the started Activity.
+        // This ensures that navigating backward from the Activity leads out of the app to the Home screen.
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+
+        // Adds the back stack for the Intent (but not the Intent itself)
+        stackBuilder.addParentStack(MainContactScreen.class);
+
+        // Adds the Intent that starts the Activity to the top of the stack
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(
+                        0,
+                        PendingIntent.FLAG_UPDATE_CURRENT
+                );
+        // Lead user to the program content and clear the notification when user clicks on it
+        nBuilder.setContentIntent(resultPendingIntent);
+
+        // Optional, but set the priority of the notification to be maximum when user sees it
+        nBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+
+        // Set large icon such as profile picture in the notification
+        Bitmap largeIcon = MediaStore.Images.Media.getBitmap(this.getContentResolver(), original);
+        nBuilder.setLargeIcon(largeIcon);
+
+        // mNotificationId is a unique integer the app uses to identify the notification
+        // Use this to identify which notification to submit to the manager
+        int mNotificationId = 001;
+        mNotificationManager.notify(mNotificationId, nBuilder.build());
     }
 
 

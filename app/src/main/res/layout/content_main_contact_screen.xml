@@ -48,10 +48,18 @@
                 android:background="@color/colorAccent"
                 android:text="Template"
                 android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Test Noti" />
+
         </LinearLayout>
 
 
-            <ListView
+        <ListView
                 android:id="@+id/contactList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

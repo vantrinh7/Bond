@@ -22,7 +22,7 @@ import java.text.DateFormat;
 
 
 /**
- * An inner class that defines properties of time picker fragment and events when user sets time
+ * A class that defines properties of time picker fragment and events when user sets time
  */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 

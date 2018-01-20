@@ -15,7 +15,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 /**
- * An inner class that defines properties of time picker fragment and events when user sets time
+ * A class that defines properties of time picker fragment and events when user sets time
  */
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
     /**
