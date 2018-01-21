@@ -80,6 +80,7 @@ public class CalendarCustomView extends LinearLayout{
     /** Method to check if there is an event on a given date */
     private boolean hasEventCheck (String day) {
         //check if there is a event with that day + if the month and year are the same
+        System.out.println("Checking date: " + day + currentDate.getText().toString());
         if (MainContactScreen.eventList.containsKey(day + currentDate.getText().toString())){
             return true;
         }
@@ -96,6 +97,10 @@ public class CalendarCustomView extends LinearLayout{
                 //if it is then do all this shit
                 TextView day = (TextView) view.findViewById(R.id.calendar_date_id);
                 String dayNumber = (String) day.getText();
+                int i = Integer.parseInt(dayNumber);
+                if (i < 10) {
+                    dayNumber = "0" + dayNumber;
+                }
 
                 if (hasEventCheck(dayNumber)) {
                     // custom dialog
@@ -121,7 +126,6 @@ public class CalendarCustomView extends LinearLayout{
             }
         });
     }
-
 
     private void setUpCalendarAdapter(){
         List<Date> dayValueInCells = new ArrayList<Date>();

@@ -1,41 +1,20 @@
 package com.example.demouser.bond;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TimePicker;
-import android.widget.Toast;
-
-import java.text.ParseException;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-
-import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.logging.Logger;
 
 public class IndividualContactActivity extends AppCompatActivity {
     public static final String NAME_TEXT = "com.example.demouser.bond.NAME_TEXT";
@@ -47,11 +26,13 @@ public class IndividualContactActivity extends AppCompatActivity {
     protected String imageSrc = "";
     private Button nextTime;
     private Button nextDate;
-    public Date setDate;
-    private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+    private EditText nameText;
+    private EditText emailText;
+    private EditText phoneText;
+    private EditText noteText;
+    private ImageView imageView;
+    private String intentID;
     private static int RESULT_LOAD_IMAGE = 1;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,12 +40,28 @@ public class IndividualContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_individual_contact);
         handleSaveButton();
 
+        //grab all the views
+        nameText = (EditText) findViewById(R.id.name);
+        emailText = (EditText) findViewById(R.id.email);
+        phoneText = (EditText) findViewById(R.id.phone);
+        noteText = (EditText) findViewById(R.id.note);
+        imageView = (ImageView) findViewById(R.id.picture);
+        nextDate = findViewById(R.id.nextDate);
+        nextTime = findViewById(R.id.nextTime);
+
+        Intent intent = this.getIntent();
+        if (intent != null) {
+            intentID = intent.getStringExtra("ID");
+            if (intentID.equals("IndividualContactPage")) {
+                getOldInformation(intent);
+            }
+        }
+
         ImageView picture = (ImageView) findViewById(R.id.picture);
         picture.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-
                 //Intent to open Gallery for image selection
                 Intent i = new Intent(
                         Intent.ACTION_PICK,
@@ -74,9 +71,15 @@ public class IndividualContactActivity extends AppCompatActivity {
             }
         });
 
+        setUpCurrentDate();
+        handleNextDateButton();
+    }
 
+    /**
+     * Set up current date
+     */
+    protected void setUpCurrentDate () {
         // Use the current time as the default values for the next time button
-        nextTime = findViewById(R.id.nextTime);
         final Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
@@ -97,16 +100,39 @@ public class IndividualContactActivity extends AppCompatActivity {
         handleNextTimeButton();
 
         // Use the current date as the default values for the next date button
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        nextDate = findViewById(R.id.nextDate);
-        DateFormatSymbols symbols  = new DateFormatSymbols();
-        String monthText = symbols.getMonths()[month];
-        nextDate.setText("" + monthText + " " + day + ", " + year);
-        handleNextDateButton();
+        if (intentID.equals("MainContactScreen")) {
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            DateFormatSymbols symbols  = new DateFormatSymbols();
+            String monthText = symbols.getMonths()[month];
+            nextDate.setText("" + monthText + " " + day + ", " + year);
+        }
     }
-
+    /**
+     * Method to get information from the Individual Contact Page
+     */
+    protected void getOldInformation (Intent intent) {
+        if (intent.getStringExtra("name") != null) {
+            nameText.setText(intent.getStringExtra("name"));
+        };
+        if (intent.getStringExtra("email") != null) {
+            emailText.setText(intent.getStringExtra("email"));
+        }
+        if (intent.getStringExtra("phone") != null) {
+            phoneText.setText(intent.getStringExtra("phone"));
+        }
+        if (intent.getStringExtra("note") != null) {
+            noteText.setText(intent.getStringExtra("note"));
+        }
+        if (intent.getStringExtra("nextContact") != null) {
+            nextDate.setText(intent.getStringExtra("nextContact"));
+        }
+        if (intent.getStringExtra("image") != null) {
+            String image = intent.getStringExtra("image");
+            imageView.setImageURI(Uri.parse(image));
+        }
+    }
     /**
      * Method to determine events when clicking Save button
      */
@@ -118,42 +144,44 @@ public class IndividualContactActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Get text from name, email, phone text fields, save into variables
-                EditText nameText = (EditText) findViewById(R.id.name);
-                String name = nameText.getText().toString();
+                //if the previous screen is the main contact screen then pack information and finish the activity
+                if (intentID.equals("MainContactScreen")) {
+                    Intent intent = new Intent ();
+                    packInformation(intent);
+                    setResult(RESULT_OK, intent);
+                    finish();
 
-                EditText emailText = (EditText) findViewById(R.id.email);
-                String email = emailText.getText().toString();
-
-                EditText phoneText = (EditText) findViewById(R.id.phone);
-                String phone = phoneText.getText().toString();
-
-                EditText noteText = (EditText) findViewById(R.id.note);
-                String note = noteText.getText().toString();
-
-                String dateSet = nextDate.getText().toString();
-
-                // Create a new intent to hold each data
-                Intent intent = new Intent();
-
-                // Put each of the data along with a "key" name that will be used to get each data
-                intent.putExtra(NAME_TEXT, name);
-                intent.putExtra(EMAIL_TEXT, email);
-                intent.putExtra(PHONE_TEXT, phone);
-                intent.putExtra(DATE_TEXT, dateSet);
-                intent.putExtra(NOTE_TEXT, note);
-
-
-                //if user added a new image then save the source of that image
-                if (!imageSrc.equals("")) {
-                    intent.putExtra(IMAGE_TEXT, imageSrc);
+               }
+                else if (intentID.equals("IndividualContactPage")) {
+                    Intent newIntent = new Intent(IndividualContactActivity.this, MainContactScreen.class);
+                    packInformation(newIntent);
+                    startActivity(newIntent);
                 }
-
-                // Set the result to be the intent just created
-                setResult(RESULT_OK, intent);
-                finish();
             }
         });
+    }
+
+    /**
+     * Method to package information about the contact
+     */
+    protected void packInformation (Intent intent) {
+        String name = nameText.getText().toString();
+        String email = emailText.getText().toString();
+        String phone = phoneText.getText().toString();
+        String note = noteText.getText().toString();
+        String dateSet = nextDate.getText().toString();
+
+        intent.putExtra(NAME_TEXT, name);
+        intent.putExtra(EMAIL_TEXT, email);
+        intent.putExtra(PHONE_TEXT, phone);
+        intent.putExtra(DATE_TEXT, dateSet);
+        intent.putExtra(NOTE_TEXT, note);
+
+        if (!imageSrc.equals("")) {
+            intent.putExtra(IMAGE_TEXT, imageSrc);
+        }
+
+        intent.putExtra("ID", "IndividualContactActivity");
     }
 
     /**
@@ -179,7 +207,6 @@ public class IndividualContactActivity extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView imageView = (ImageView) findViewById(R.id.picture);
             imageView.setImageURI(selectedImage);
             imageSrc = selectedImage.toString();
         }
@@ -197,7 +224,6 @@ public class IndividualContactActivity extends AppCompatActivity {
                 DialogFragment newFragment = new DatePickerFragment();
                 newFragment.show(getFragmentManager(), "Date picker");
                 Log.d("My activity", "Called new Fragment");
-                //System.out.println("dis the date: " + dateFormat.format(newFragment.getDate()));
             }
         });
     }

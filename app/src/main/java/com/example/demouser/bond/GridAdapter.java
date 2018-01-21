@@ -59,7 +59,6 @@ public class GridAdapter extends ArrayAdapter {
             eventCalendar.setTime(allEvents.get(i).getDate());
             if (dayValue == eventCalendar.get(Calendar.DAY_OF_MONTH) && displayMonth == eventCalendar.get(Calendar.MONTH) + 1
                     && displayYear == eventCalendar.get(Calendar.YEAR)) {
-                System.out.println("Event detected!");
                 eventIndicator.setBackgroundColor(Color.parseColor("#3F51B5"));
             }
         }
