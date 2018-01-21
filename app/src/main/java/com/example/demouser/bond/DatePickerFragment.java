@@ -12,23 +12,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.DatePicker;
-import java.text.SimpleDateFormat;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.text.DateFormat;
-
 
 /**
  * A class that defines properties of time picker fragment and events when user sets time
  */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-    public Date date;
-    private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-
+    private boolean isDateSet = false;
+    private int theYear;
+    private int theMonth;
+    private int theDate;
+    private int theDayOfWeek;
 
     /**
      * Method is invoked when dialog is created
@@ -41,12 +38,12 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         Log.d("My activity", "Create dialog");
         // Use the current date as the default date in the picker
         final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
+        theYear = c.get(Calendar.YEAR);
+        theMonth = c.get(Calendar.MONTH);
+        theDate = c.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), this, year, month, day);
+        return new DatePickerDialog(getActivity(), this, theYear, theMonth, theDate);
     }
 
     /**
@@ -59,24 +56,64 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
      */
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        theYear = year;
+        theMonth = month;
+        theDate = day;
+        theDayOfWeek = datePicker.getFirstDayOfWeek();
+
         // Get month in word form
         DateFormatSymbols symbols  = new DateFormatSymbols();
         String monthText = symbols.getMonths()[month];
 
+        String dayText = "";
+        switch (theDayOfWeek) {
+            case 1:
+                dayText = "Sunday";
+                break;
+            case 2:
+                dayText = "Monday";
+                break;
+            case 3:
+                dayText = "Tuesday";
+                break;
+            case 4:
+                dayText = "Wednesday";
+                break;
+            case 5:
+                dayText = "Thursday";
+                break;
+            case 6:
+                dayText = "Friday";
+                break;
+            case 7:
+                dayText = "Saturday";
+                break;
+        }
+
         // Set button to show the date chosen and set color to green
-        ((Button) getActivity().findViewById(R.id.nextDate)).setText(monthText + " " + day + ", " + year);
+        ((Button) getActivity().findViewById(R.id.nextDate)).setText(dayText + ", " + monthText + " " + day + ", " + year);
         ((Button) getActivity().findViewById(R.id.nextDate)).setTextColor(Color.rgb(30, 175, 20));
 
-        // Create a new date object
-        date = new GregorianCalendar(year, month, day).getTime();
+        // Jump to time picker page
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "Time picker");
 
-        System.out.println("Date obtained! Parsing: " + dateFormat.format(date));
-        getDate();
-
+        isDateSet = true;
     }
 
-    public Date getDate() {
-       // System.out.println("Parsing: " + dateFormat.format(date));
-        return date;
+    public boolean isDateSet() {
+        return isDateSet;
+    }
+
+    public int getYear() {
+        return theYear;
+    }
+
+    public int getMonth() {
+        return theMonth;
+    }
+
+    public int getDate() {
+        return theDate;
     }
 }

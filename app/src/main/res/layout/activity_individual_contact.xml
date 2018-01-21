@@ -145,7 +145,7 @@
 
                 <Button
                     android:id="@+id/button4"
-                    android:layout_width="104dp"
+                    android:layout_width="171dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="#00FF0000"
@@ -181,7 +181,7 @@
 
                 <Button
                     android:id="@+id/nextDate"
-                    android:layout_width="162dp"
+                    android:layout_width="226dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="#00FF0000"
@@ -204,11 +204,26 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/purposeLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="What I will talk about"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/purpose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLength="5000" />
+
+            <TextView
                 android:id="@+id/noteLabel1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Note"
+                android:text="Notes"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/noteLabel1"
                 app:layout_constraintEnd_toStartOf="@+id/noteLabel1"
@@ -222,7 +237,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textCapSentences|textMultiLine"
-                android:maxLength="2000"
+                android:maxLength="100000"
                 android:scrollHorizontally="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
