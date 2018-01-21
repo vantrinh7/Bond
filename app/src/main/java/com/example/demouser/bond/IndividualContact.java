@@ -28,4 +28,33 @@ public class IndividualContact {
         this.note = note;
         this.nextContact = nextContact;
     }
+
+    public void setName (String name) {
+        this.name = name;
+    }
+
+    public void setEmail (String email) {
+        this.email = email;
+    }
+
+    public void setPhone (String phone) {
+        this.phone = phone;
+    }
+
+    public void setLastContact (String lastContact) {
+        this.lastContact = lastContact;
+    }
+
+    public void setNextContact (String nextContact) {
+        this.nextContact = nextContact;
+    }
+
+    public void setNoteContact (String note) {
+        this.note = note;
+    }
+
+    public void setImage(Uri image) {
+        this.image = image;
+    }
+
 }

@@ -37,7 +37,7 @@ public class MainContactScreen extends AppCompatActivity {
 
     private static ArrayList<String> nameList = new ArrayList<>();
     private static ArrayList<Uri> imageArray = new ArrayList<>();
-    public HashMap<String, IndividualContact> contacts = new HashMap<> ();
+    public static HashMap<String, IndividualContact> contacts = new HashMap<> ();
     public static HashMap<String, EventObjects> eventList = new HashMap<>();
     public static List<EventObjects> mEvents = new ArrayList<>();
     private SimpleDateFormat formatter = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH);
@@ -46,6 +46,8 @@ public class MainContactScreen extends AppCompatActivity {
     private ListView contactList;
     private final Uri original = Uri.parse("android.resource://com.example.demouser.bond/drawable/octopus");
     private SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, yyyy");
+    private static IndividualContact currentTarget;
+    private static int currentPosition;
 
 
     /**
@@ -89,6 +91,57 @@ public class MainContactScreen extends AppCompatActivity {
         });
 
         handleTestNotiButton();
+
+        //call method to save edited information
+        Intent intent = this.getIntent();
+        if (intent != null) {
+            if (intent.hasExtra("ID")) {
+                saveEditedInformation(intent);
+                }
+            }
+        }
+
+
+    /**
+     * Method to save edited information
+     */
+    protected void saveEditedInformation (Intent intent) {
+        String oldContactName = currentTarget.name;
+        String oldContactDate = currentTarget.nextContact;
+
+        Date d = parseStringtoDate(oldContactDate);
+        String contactName = intent.getStringExtra(IndividualContactActivity.NAME_TEXT);
+        if (d != null) {
+            if (eventList.containsKey(dayFormatter.format(d) + formatter.format(d))) {
+                int i = mEvents.indexOf(eventList.get(dayFormatter.format(d) + formatter.format(d)));
+                if (i != -1) {
+                    mEvents.remove(i);
+                }
+                eventList.remove(dayFormatter.format(d) + formatter.format(d));
+            }
+        }
+        currentTarget.setName(intent.getStringExtra(IndividualContactActivity.NAME_TEXT));
+        currentTarget.setEmail(intent.getStringExtra(IndividualContactActivity.EMAIL_TEXT));
+        currentTarget.setNoteContact(intent.getStringExtra(IndividualContactActivity.NOTE_TEXT));
+        currentTarget.setPhone(intent.getStringExtra(IndividualContactActivity.PHONE_TEXT));
+        currentTarget.setNextContact(intent.getStringExtra(IndividualContactActivity.DATE_TEXT));
+
+        Date newDate = parseStringtoDate(intent.getStringExtra(IndividualContactActivity.DATE_TEXT));
+        if (newDate != null) {
+            EventObjects event = new EventObjects("Contact " + contactName, newDate);
+            //add events to HashMap + ArrayList
+            eventList.put(dayFormatter.format(newDate) + formatter.format(newDate), event);
+            //System.out.println("Event added at: " + dayFormatter.format(newDate) + formatter.format(newDate));
+            mEvents.add(event);
+        }
+
+        String image = intent.getStringExtra(IndividualContactActivity.IMAGE_TEXT);
+        nameList.set(currentPosition, contactName);
+        //remove old contact name from list if they are different
+        if (!contactName.equals(oldContactName)) {
+            contacts.put(contactName, currentTarget);
+            contacts.remove(oldContactName);
+        }
     }
 
     /**
@@ -107,9 +160,11 @@ public class MainContactScreen extends AppCompatActivity {
                 Intent intent = new Intent(MainContactScreen.this, IndividualContactPage.class);
                 //get contact from contact HashMap
                 String message = nameList.get(position);
+                currentPosition = position;
 
                 //getting the contact information corresponding to the name
                 IndividualContact target = contacts.get(message);
+                currentTarget = target;
                 intent.putExtra("name", target.name);
                 intent.putExtra("email", target.email);
                 intent.putExtra("phone", target.phone);
@@ -132,6 +187,7 @@ public class MainContactScreen extends AppCompatActivity {
         // Create a new intent to start a new activity. First parameter: context, usually this.
         // Second parameter: the class that denotes new activity
         Intent intent = new Intent(this, IndividualContactActivity.class);
+        intent.putExtra("ID", "MainContactScreen");
 
         // Use startActivity() to simply start a new screen, use startActivityForResult() to get some results back.
         // Must implement onActivityResult() method below to denote what happens when result comes back
@@ -199,6 +255,7 @@ public class MainContactScreen extends AppCompatActivity {
                 IndividualContact contact1 = new IndividualContact(name, email, phone, "2212", date, note, imageUri);
                 //add contact to contactList HashMap with key = name and value = the contact
                 contacts.put(name, contact1);
+
 
                 //parse String date into Date object
                 Date d = parseStringtoDate(date);
