@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.example.demouser.bond"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -33,11 +33,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     // Facebook Core only (Analytics)
     compile 'com.facebook.android:facebook-core:4.28.0'
-
     // Facebook Login only
     compile 'com.facebook.android:facebook-login:4.28.0'
-
     // Facebook Share only
     compile 'com.facebook.android:facebook-share:4.28.0'
-
 }

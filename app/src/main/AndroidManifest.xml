@@ -72,6 +72,19 @@
             android:theme="@style/Theme.AccountKit"
             tools:replace="android:theme" />
         <activity android:name=".FacebookLoginActivity" />
+        <activity
+            android:name=".ItemListActivity"
+            android:label="@string/title_item_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".ItemListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.demouser.bond.ItemListActivity" />
+        </activity>
     </application>
 
 </manifest>
