@@ -145,7 +145,9 @@ public class MainContactScreen extends AppCompatActivity {
         if (!contactName.equals(oldContactName)) {
             contacts.put(contactName, currentTarget);
             contacts.remove(oldContactName);
-            imageArray.set(currentPosition, Uri.parse(image));
+            if (image != null) {
+                imageArray.set(currentPosition, Uri.parse(image));
+            }
         }
     }
 
