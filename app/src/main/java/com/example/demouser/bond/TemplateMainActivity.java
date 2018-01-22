@@ -21,7 +21,7 @@ public class TemplateMainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_template_main);
 
             gridView = (GridView) findViewById(R.id.gridView);
-            gridAdapter = new TemplateGridAdapter(this, R.layout.activity_template_main_grid, getData());
+            gridAdapter = new TemplateGridAdapter(this, R.layout.activity_template_main_grid_items, getData());
             gridView.setAdapter(gridAdapter);
         }
 
@@ -36,6 +36,9 @@ public class TemplateMainActivity extends AppCompatActivity {
         //Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
                 //R.drawable.icon_resource);
         imageItems.add(new TemplateMainItemObjects("Job Recruiting"));
+        imageItems.add(new TemplateMainItemObjects("Holiday Greetings"));
+        imageItems.add(new TemplateMainItemObjects("Birthday/ Anniversaries"));
+        imageItems.add(new TemplateMainItemObjects("Conversation Starters"));
 
         return imageItems;
     }

@@ -38,6 +38,8 @@ public class TemplateGridAdapter extends ArrayAdapter {
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new ViewHolder();
             holder.imageTitle = (TextView) row.findViewById(R.id.text);
+            System.out.println ("holder is null :" + holder != null);
+            System.out.println ("holder is null :" + holder != null);
             holder.image = (ImageView) row.findViewById(R.id.image);
             row.setTag(holder);
         } else {
