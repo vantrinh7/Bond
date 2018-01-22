@@ -72,7 +72,6 @@
             android:theme="@style/Theme.AccountKit"
             tools:replace="android:theme" />
         <activity android:name=".FacebookLoginActivity" />
-        <activity android:name=".FacebookActivity"></activity>
     </application>
 
 </manifest>
