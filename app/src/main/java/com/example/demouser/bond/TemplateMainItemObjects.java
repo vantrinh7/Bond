@@ -1,33 +1,35 @@
-//package com.example.demouser.bond;
-//
-///**
-// * Created by demouser on 1/19/18.
-// */
-//
-//
-//public class TemplateMainItemObjects {
-//
-//    private String content;
-//    private String imageResourcece;
-//
-//    public TemplateMainItemObjects(String content, String imageResource) {
-//        this.content = content;
-//        this.imageResource = imageResource;
-//    }
-//
-//    public String getContent() {
-//        return content;
-//    }
-//
-//    public void setContent(String content) {
-//        this.content = content;
-//    }
-//
-//    public String getImageResource() {
-//        return imageResource;
+package com.example.demouser.bond;
+
+import android.graphics.Bitmap;
+
+/**
+ * Created by demouser on 1/19/18.
+ */
+
+
+public class TemplateMainItemObjects {
+
+    private String content;
+    //private Bitmap image;
+
+    public TemplateMainItemObjects(String content) {
+        this.content = content;
+        //this.image = image;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+//    public Bitmap getImageResource() {
+//        return image;
 //    }
 //
 //    public void setImageResource(String imageResource) {
-//        this.imageResource = imageResource;
+//        this.image = image;
 //    }
-//}
+}
