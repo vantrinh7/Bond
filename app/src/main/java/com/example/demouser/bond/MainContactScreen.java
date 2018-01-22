@@ -131,16 +131,21 @@ public class MainContactScreen extends AppCompatActivity {
             EventObjects event = new EventObjects("Contact " + contactName, newDate);
             //add events to HashMap + ArrayList
             eventList.put(dayFormatter.format(newDate) + formatter.format(newDate), event);
-            //System.out.println("Event added at: " + dayFormatter.format(newDate) + formatter.format(newDate));
             mEvents.add(event);
         }
 
         String image = intent.getStringExtra(IndividualContactActivity.IMAGE_TEXT);
+        if (image != null) {
+            if (!image.equals("")) {
+                currentTarget.setImage(Uri.parse(image));
+            }
+        }
         nameList.set(currentPosition, contactName);
         //remove old contact name from list if they are different
         if (!contactName.equals(oldContactName)) {
             contacts.put(contactName, currentTarget);
             contacts.remove(oldContactName);
+            imageArray.set(currentPosition, Uri.parse(image));
         }
     }
 

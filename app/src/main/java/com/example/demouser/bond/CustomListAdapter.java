@@ -1,7 +1,9 @@
 package com.example.demouser.bond;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import java.io.File;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -42,6 +45,9 @@ public class CustomListAdapter extends ArrayAdapter {
 
         //this code sets the values of the objects to values from the arrays
         nameTextField.setText(nameArray.get(position));
+
+
+        //imageView.setImageURI(selectedImage);
         imageView.setImageURI(imageIDarray.get(position));
         return rowView;
 

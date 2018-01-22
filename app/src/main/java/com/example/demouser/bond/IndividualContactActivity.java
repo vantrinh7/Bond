@@ -1,6 +1,7 @@
 package com.example.demouser.bond;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import java.io.IOException;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
@@ -229,7 +232,20 @@ public class IndividualContactActivity extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            imageView.setImageURI(selectedImage);
+            Bitmap bitmap = null;
+            try
+            {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+            }
+            catch (IOException e)
+            {
+                System.out.println("Image cannot be converted into Bitmap");
+            }
+
+            //imageView.setImageURI(selectedImage);
+            if (bitmap != null) {
+                imageView.setImageBitmap(bitmap);
+            }
             imageSrc = selectedImage.toString();
         }
     }
