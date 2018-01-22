@@ -48,7 +48,8 @@ public class IndividualContactPage extends AppCompatActivity {
         name.setText(getIntent().getStringExtra("name"));
         phone.setText(getIntent().getStringExtra("phone"));
         email.setText(getIntent().getStringExtra("email"));
-        lastContact.setText(getIntent().getStringExtra("lastContact"));
+        //lastContact.setText(getIntent().getStringExtra("lastContact"));
+        lastContact.setText("");
         nextContact.setText(getIntent().getStringExtra("nextContact"));
         note.setText(getIntent().getStringExtra("note"));
 

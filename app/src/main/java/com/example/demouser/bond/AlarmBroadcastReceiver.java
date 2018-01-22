@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 
 public class AlarmBroadcastReceiver extends BroadcastReceiver {
-    private final Uri original = Uri.parse("android.resource://com.example.demouser.bond/drawable/octopus");
+    private final Uri original = Uri.parse("android.resource://com.example.demouser.bond/drawable/logo");
 
     @Override
     public void onReceive(Context context, Intent intent) {

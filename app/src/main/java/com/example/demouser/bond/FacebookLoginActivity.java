@@ -11,10 +11,15 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+//import com.facebook.Response;
 import com.facebook.accountkit.AccountKit;
-import com.facebook.accountkit.AccountKitLoginResult;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+//import com.facebook.Request;
+//import com.facebook.Session;
+//import com.facebook.model.GraphUser;
+
+import java.util.List;
 
 public class FacebookLoginActivity extends AppCompatActivity {
     private CallbackManager callbackManager;
@@ -34,7 +39,7 @@ public class FacebookLoginActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                goToMyLoggedInActivity();
+                goToMainScreen();
                 com.facebook.accountkit.AccessToken accessToken = AccountKit.getCurrentAccessToken();
                 if (accessToken != null) {
                     //Handle Returning User
@@ -53,53 +58,49 @@ public class FacebookLoginActivity extends AppCompatActivity {
                 // App code
             }
         });
+
+
+        Bundle bundle = new Bundle();
+        bundle.putString("fields", "id, name, picture");
+//        Session session = Session.getActiveSession();
+//        Request.newMyFriendsRequest(session, new Request.GraphUserListCallback() {
+//            @Override
+//            public void onCompleted(List<GraphUser> users, Response response) {
+//                if(response.getError() == null)
+//                {
+//                    for (int i = 0; i < users.size(); i++) {
+//                        Log.e("My activity", "users " + users.get(i).getName());
+//                    }
+//                }
+//                else
+//                {
+//                    Toast.makeText(getBaseContext(),
+//                            response.getError().getErrorMessage(),
+//                            Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//        });
+
+
+
     }
 
+    /**
+     * This method is needed to pass the activity result to the callbackManager
+     * and execute methods in the callback
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == APP_REQUEST_CODE) { // confirm that this response matches your request
-            AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
-            String toastMessage;
-            if (loginResult.getError() != null) {
-                toastMessage = loginResult.getError().getErrorType().getMessage();
-                Log.d("My activity", "There's an error: " + loginResult.getError());
-                //showErrorActivity(loginResult.getError());
-            } else if (loginResult.wasCancelled()) {
-                toastMessage = "Login Cancelled";
-            } else {
-                if (loginResult.getAccessToken() != null) {
-                    toastMessage = "Success:" + loginResult.getAccessToken().getAccountId();
-                } else {
-                    toastMessage = String.format(
-                            "Success:%s...",
-                            loginResult.getAuthorizationCode().substring(0,10));
-                }
-
-                // If you have an authorization code, retrieve it from
-                // loginResult.getAuthorizationCode()
-                // and pass it to your server and exchange it for an access token.
-
-                // Success! Start your next activity...
-                goToMyLoggedInActivity();
-                Log.d("My activity", "New sctivity is called onActivityResult");
-            }
-
-            // Surface the result to your user in an appropriate way.
-            Toast.makeText(
-                    this,
-                    toastMessage,
-                    Toast.LENGTH_LONG)
-                    .show();
-        }
-
     }
 
-    public void goToMyLoggedInActivity() {
+    public void goToMainScreen() {
         Intent newIntent = new Intent(getBaseContext(), MainContactScreen.class);
         startActivity(newIntent);
-        Log.d("My activity", "New sctivity is called");
     }
 }
