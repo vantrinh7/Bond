@@ -54,19 +54,25 @@
             </intent-filter>
         </receiver>
 
-        <meta-data android:name="com.facebook.accountkit.ApplicationName"
+        <meta-data
+            android:name="com.facebook.accountkit.ApplicationName"
             android:value="@string/app_name" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/FACEBOOK_APP_ID" />
-        <meta-data android:name="com.facebook.accountkit.ClientToken"
+        <meta-data
+            android:name="com.facebook.accountkit.ClientToken"
             android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />
-        <meta-data android:name="com.facebook.accountkit.FacebookAppEventsEnabled"
-            android:value="true"/>
+        <meta-data
+            android:name="com.facebook.accountkit.FacebookAppEventsEnabled"
+            android:value="true" />
+
         <activity
             android:name="com.facebook.accountkit.ui.AccountKitActivity"
             android:theme="@style/Theme.AccountKit"
             tools:replace="android:theme" />
-        <activity android:name=".FacebookLoginActivity"></activity>
+        <activity android:name=".FacebookLoginActivity" />
+        <activity android:name=".FacebookActivity"></activity>
     </application>
 
 </manifest>
