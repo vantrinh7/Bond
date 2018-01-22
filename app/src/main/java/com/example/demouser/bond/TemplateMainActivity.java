@@ -11,19 +11,6 @@ public class TemplateMainActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_template_main);
-
-//        GridView gridview = (GridView) findViewById(R.id.gridView);
-//
-//        List<TemplateMainItemObjects> allItems = getAllItemObject();
-//        TemplateMainAdapter templateMainAdapter = new TemplateMainAdapter(TemplateMainActivity.this, allItems);
-//        gridview.setAdapter(templateMainAdapter);
-//
-//        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(TemplateMainActivity.this, "Position: " + position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
         }
         @Override
         public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,35 +30,4 @@ public class TemplateMainActivity extends AppCompatActivity {
             }
             return super.onOptionsItemSelected(item);
         }
-
-//    private List<TemplateMainItemObjects> getAllItemObject(){
-//        TemplateMainItemObjects itemObject = null;
-//        List<TemplateMainItemObjects> items = new ArrayList<>();
-//        items.add(new TemplateMainItemObjects("Image One", "one"));
-//        items.add(new TemplateMainItemObjects("Image Two", "two"));
-//        items.add(new TemplateMainItemObjects("Image Three", "three"));
-//        items.add(new TemplateMainItemObjects("Image Four", "four"));
-//        items.add(new TemplateMainItemObjects("Image Five", "five"));
-//        items.add(new TemplateMainItemObjects("Image Six", "six"));
-//        items.add(new TemplateMainItemObjects("Image Seven", "seven"));
-//        items.add(new TemplateMainItemObjects("Image Eight", "eight"));
-//        items.add(new TemplateMainItemObjects("Image One", "one"));
-//        items.add(new TemplateMainItemObjects("Image Two", "two"));
-//        items.add(new TemplateMainItemObjects("Image Three", "three"));
-//        items.add(new TemplateMainItemObjects("Image Four", "four"));
-//        items.add(new TemplateMainItemObjects("Image Five", "five"));
-//        items.add(new TemplateMainItemObjects("Image Six", "six"));
-//        items.add(new TemplateMainItemObjects("Image Seven", "seven"));
-//        items.add(new TemplateMainItemObjects("Image Eight", "eight"));
-//        items.add(new TemplateMainItemObjects("Image One", "one"));
-//        items.add(new TemplateMainItemObjects("Image Two", "two"));
-//        items.add(new TemplateMainItemObjects("Image Three", "three"));
-//        items.add(new TemplateMainItemObjects("Image Four", "four"));
-//        items.add(new TemplateMainItemObjects("Image Five", "five"));
-//        items.add(new TemplateMainItemObjects("Image Six", "six"));
-//        items.add(new TemplateMainItemObjects("Image Seven", "seven"));
-//        items.add(new TemplateMainItemObjects("Image Eight", "eight"));
-//        return items;
-//    }
-
 }

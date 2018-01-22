@@ -1,6 +1,4 @@
 package com.example.demouser.bond;
-
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -33,6 +31,9 @@ public class IndividualContactActivity extends AppCompatActivity {
     private ImageView imageView;
     private String intentID;
     private static int RESULT_LOAD_IMAGE = 1;
+    protected static DatePickerFragment dateFragment;
+    protected static String name = "";
+    protected static String purpose = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +87,10 @@ public class IndividualContactActivity extends AppCompatActivity {
         String am_pm = "";
         if (hour < 12) {
             am_pm = "AM";
-        } else {
+        } else  if (hour > 12){
             hour = hour - 12;
+            am_pm = "PM";
+        } else {
             am_pm = "PM";
         }
         String minText = "";
@@ -104,9 +107,35 @@ public class IndividualContactActivity extends AppCompatActivity {
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
-            DateFormatSymbols symbols  = new DateFormatSymbols();
+            int theDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+            nextDate = findViewById(R.id.nextDate);
+            DateFormatSymbols symbols = new DateFormatSymbols();
             String monthText = symbols.getMonths()[month];
-            nextDate.setText("" + monthText + " " + day + ", " + year);
+            String dayText = "";
+            switch (theDayOfWeek) {
+                case 1:
+                    dayText = "Sunday";
+                    break;
+                case 2:
+                    dayText = "Monday";
+                    break;
+                case 3:
+                    dayText = "Tuesday";
+                    break;
+                case 4:
+                    dayText = "Wednesday";
+                    break;
+                case 5:
+                    dayText = "Thursday";
+                    break;
+                case 6:
+                    dayText = "Friday";
+                    break;
+                case 7:
+                    dayText = "Saturday";
+                    break;
+            }
+            nextDate.setText(dayText + ", " + monthText + " " + day + ", " + year);
         }
     }
     /**
@@ -144,6 +173,20 @@ public class IndividualContactActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Get text from name, email, phone text fields, save into variables
+                EditText nameText = (EditText) findViewById(R.id.name);
+                name = nameText.getText().toString();
+
+                EditText emailText = (EditText) findViewById(R.id.email);
+                String email = emailText.getText().toString();
+
+                EditText phoneText = (EditText) findViewById(R.id.phone);
+                String phone = phoneText.getText().toString();
+
+                EditText noteText = (EditText) findViewById(R.id.note);
+                String note = noteText.getText().toString();
+
+                String dateSet = nextDate.getText().toString();
                 //if the previous screen is the main contact screen then pack information and finish the activity
                 if (intentID.equals("MainContactScreen")) {
                     Intent intent = new Intent ();
@@ -171,11 +214,14 @@ public class IndividualContactActivity extends AppCompatActivity {
         String note = noteText.getText().toString();
         String dateSet = nextDate.getText().toString();
 
-        intent.putExtra(NAME_TEXT, name);
-        intent.putExtra(EMAIL_TEXT, email);
-        intent.putExtra(PHONE_TEXT, phone);
-        intent.putExtra(DATE_TEXT, dateSet);
-        intent.putExtra(NOTE_TEXT, note);
+                EditText purposeText = (EditText) findViewById(R.id.purpose);
+                purpose = purposeText.getText().toString();
+                // Put each of the data along with a "key" name that will be used to get each data
+                intent.putExtra(NAME_TEXT, name);
+                intent.putExtra(EMAIL_TEXT, email);
+                intent.putExtra(PHONE_TEXT, phone);
+                intent.putExtra(DATE_TEXT, dateSet);
+                intent.putExtra(NOTE_TEXT, note);
 
         if (!imageSrc.equals("")) {
             intent.putExtra(IMAGE_TEXT, imageSrc);
@@ -210,7 +256,6 @@ public class IndividualContactActivity extends AppCompatActivity {
             imageView.setImageURI(selectedImage);
             imageSrc = selectedImage.toString();
         }
-
     }
 
     /**
@@ -219,11 +264,11 @@ public class IndividualContactActivity extends AppCompatActivity {
      */
     public void handleNextDateButton() {
         nextDate.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new DatePickerFragment();
-                newFragment.show(getFragmentManager(), "Date picker");
-                Log.d("My activity", "Called new Fragment");
+                dateFragment = new DatePickerFragment();
+                dateFragment.show(getFragmentManager(), "Date picker");
             }
         });
     }
@@ -234,11 +279,20 @@ public class IndividualContactActivity extends AppCompatActivity {
      */
     public void handleNextTimeButton() {
         nextTime.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new TimePickerFragment();
-                newFragment.show(getFragmentManager(), "Time picker");
+                TimePickerFragment timeFragment = new TimePickerFragment();
+                timeFragment.show(getFragmentManager(), "Time picker");
             }
         });
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPurpose() {
+        return purpose;
     }
 }

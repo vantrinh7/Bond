@@ -19,7 +19,7 @@ public class SplashActivity extends AppCompatActivity {
             {
                 try
                 {
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                     Intent intent = new Intent(getApplicationContext(), MainContactScreen.class);
                     startActivity(intent);
                     finish();
