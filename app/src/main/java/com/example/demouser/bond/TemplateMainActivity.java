@@ -31,4 +31,6 @@ public class TemplateMainActivity extends AppCompatActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+
+
 }
