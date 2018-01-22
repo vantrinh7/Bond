@@ -65,33 +65,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         DateFormatSymbols symbols  = new DateFormatSymbols();
         String monthText = symbols.getMonths()[month];
 
-        String dayText = "";
-        switch (theDayOfWeek) {
-            case 1:
-                dayText = "Sunday";
-                break;
-            case 2:
-                dayText = "Monday";
-                break;
-            case 3:
-                dayText = "Tuesday";
-                break;
-            case 4:
-                dayText = "Wednesday";
-                break;
-            case 5:
-                dayText = "Thursday";
-                break;
-            case 6:
-                dayText = "Friday";
-                break;
-            case 7:
-                dayText = "Saturday";
-                break;
-        }
-
         // Set button to show the date chosen and set color to green
-        ((Button) getActivity().findViewById(R.id.nextDate)).setText(dayText + ", " + monthText + " " + day + ", " + year);
+        ((Button) getActivity().findViewById(R.id.nextDate)).setText(monthText + " " + day + ", " + year);
         ((Button) getActivity().findViewById(R.id.nextDate)).setTextColor(Color.rgb(30, 175, 20));
 
         // Jump to time picker page

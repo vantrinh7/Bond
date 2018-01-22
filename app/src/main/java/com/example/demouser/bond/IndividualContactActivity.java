@@ -111,31 +111,7 @@ public class IndividualContactActivity extends AppCompatActivity {
             nextDate = findViewById(R.id.nextDate);
             DateFormatSymbols symbols = new DateFormatSymbols();
             String monthText = symbols.getMonths()[month];
-            String dayText = "";
-            switch (theDayOfWeek) {
-                case 1:
-                    dayText = "Sunday";
-                    break;
-                case 2:
-                    dayText = "Monday";
-                    break;
-                case 3:
-                    dayText = "Tuesday";
-                    break;
-                case 4:
-                    dayText = "Wednesday";
-                    break;
-                case 5:
-                    dayText = "Thursday";
-                    break;
-                case 6:
-                    dayText = "Friday";
-                    break;
-                case 7:
-                    dayText = "Saturday";
-                    break;
-            }
-            nextDate.setText(dayText + ", " + monthText + " " + day + ", " + year);
+            nextDate.setText(monthText + " " + day + ", " + year);
         }
     }
     /**
