@@ -1,11 +1,14 @@
 package com.example.demouser.bond;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import java.util.ArrayList;
@@ -23,6 +26,14 @@ public class TemplateMainActivity extends AppCompatActivity {
             gridView = (GridView) findViewById(R.id.gridView);
             gridAdapter = new TemplateGridAdapter(this, R.layout.activity_template_main_grid_items, getData());
             gridView.setAdapter(gridAdapter);
+
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent (TemplateMainActivity.this, ItemListActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
     // Prepare some dummy data for gridview
