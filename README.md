@@ -1,6 +1,4 @@
-## Bond 
-
-
+## Bond ![logo](misc/Bond%20Logo%202.png)
 
 An application that helps remind users to keep in touch with others, thus establishing the bonds between people and enhacing their relationships. It has several features so far:
 - Record and save detailed information of user’s contacts
@@ -9,4 +7,4 @@ An application that helps remind users to keep in touch with others, thus establ
 - Provide ideas and templates for different contents in the conversations
 
 
-
+![](misc/Bond%20Calendar.png) ![](misc/Bond%20Contact%20List.png) ![](misc/Bond%20Contact.png) ![](misc/Bond%20Template%20Menu.png) 
