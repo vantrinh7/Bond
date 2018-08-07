@@ -4,5 +4,5 @@ Bond is an application that helps remind users to keep in touch with others, thu
 - View upcoming schedule in a calendar overview
 - Provide ideas and templates for different contents in the conversations
 
-![alt text](https://raw.githubusercontent.com/vantrinh7/Bond/master/path/to/Bond Calendar.png)
+![alt text](https://github.com/vantrinh7/Bond/blob/master/Bond%20Calendar.png)
 
