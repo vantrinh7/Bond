@@ -6,11 +6,9 @@ An application that helps remind users to keep in touch with others, thus establ
 - View upcoming schedule in a calendar overview
 - Provide ideas and templates for the conversations (e.g. conversation starters, follow-up emails, greetings, wishes, self- introductions, etc.)
 <br>
-<br>
 
 ![](misc/Bond%20Calendar.png) ![](misc/Bond%20Contact%20List.png) ![](misc/Bond%20Contact.png) ![](misc/Bond%20Template%20Menu.png) 
 
-<br>
 <br>
 
 In the future, we would like to create an iOS version. There would also be additional features, such as:
@@ -19,7 +17,8 @@ In the future, we would like to create an iOS version. There would also be addit
 - Use this information to construct suggestions for conversations, emails and messages
 - Improve available templates and generate messages that are personally customized to each contact
 
+<br>
 ![](misc/Bond%20Artificial%20Intelligence.png) ![](misc/Bond%20Profile%20iPhone.png) ![](misc/Bond%20Contact%20iPhone.png) ![](misc/Bond%20Template%20Menu%20iPhone%202.png)
-
+<br>
 
 
