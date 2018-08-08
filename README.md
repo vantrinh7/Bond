@@ -13,12 +13,13 @@ An application that helps remind users to keep in touch with others, thus establ
 <br>
 <br>
 
-In the future, we would like to create an iOS version. It would have additional features such as:
+In the future, we would like to create an iOS version. There would also be additional features, such as:
 - Collect log of conversations between the user and the contacts in different platforms (e.g. text messages, Facebook Messenger, Gmail)
 - Collect public information of the contacts on social networking sites and other online sources
 - Use this information to construct suggestions for conversations, emails and messages
 - Improve available templates and generate messages that are personally customized to each contact
 
+![](misc/Bond%20Calendar.png) ![](misc/Bond%20Contact%20List.png) ![](misc/Bond%20Contact.png) ![](misc/Bond%20Template%20Menu.png) 
 
 
 
