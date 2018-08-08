@@ -1,19 +1,19 @@
 # Bond ![logo](misc/Bond%20Logo%202.png)
 
-An application that helps remind users to keep in touch with others, thus establishing the bonds between people and enhacing personal relationships. This app was originally created for Android. It has several features so far:
-- Record and save detailed information of user’s contacts (e.g. the first time you meet, hobbies, birthday, etc.)
-- Set up reminders that notify user of the next time to contact someone
+An application that helps remind users to keep in touch with others, thus establishing the bonds between people and enhacing personal relationships. This app was originally created for Android. It has so far contained several features:
+- Record and save detailed information of a con (e.g. first impression, hobbies, birthday, etc.)
+- Set up reminders that notify user of the next time to connect with someone
 - View upcoming schedule in a calendar overview
-- Provide ideas and templates for the conversations (e.g. conversation starters, follow-up emails, greetings, wishes, self- introductions, etc.)
+- Provide ideas and templates for the conversation (e.g. conversation starters, self- introductions, follow-up emails, greetings, wishes,  etc.)
 <br>
 
 ![](misc/Bond%20Calendar.png) ![](misc/Bond%20Contact%20List.png) ![](misc/Bond%20Contact.png) ![](misc/Bond%20Template%20Menu.png) 
 
 <br>
 
-In the future, we would like to create an iOS version. There would also be additional features, such as:
-- Collect log of conversations between the user and the contacts in different platforms (e.g. text messages, Facebook Messenger, Gmail)
-- Collect public information of the contacts on social networking sites and other online sources
+In the future, we would like to create an iOS version for this app. Additional features would also be implemented, such as:
+- Collect a log of conversations between the user and the contacts in different platforms (e.g. text messages, Facebook Messenger, Gmail)
+- Collect information of the contacts on social networking sites and other online sources
 - Use this information to construct suggestions for conversations, emails and messages
 - Improve available templates and generate messages that are personally customized to each contact
 
