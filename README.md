@@ -19,7 +19,7 @@ In the future, we would like to create an iOS version. There would also be addit
 - Use this information to construct suggestions for conversations, emails and messages
 - Improve available templates and generate messages that are personally customized to each contact
 
-![](misc/Bond%20Calendar.png) ![](misc/Bond%20Contact%20List.png) ![](misc/Bond%20Contact.png) ![](misc/Bond%20Template%20Menu.png) 
+![](misc/Bond%20Artificial%20Intelligence.png) ![](misc/Bond%20Profile%20iPhone.png) ![](misc/Bond%20Contact%20iPhone.png) ![](misc/Bond%20Template%20Menu%20iPhone%202.png)
 
 
 
