@@ -12,11 +12,11 @@ Bond is an application that helps remind users to keep in touch with others, thu
 <br>
 
 In the future, an iOS version for this app will be created. Additional features will also be implemented, such as:
+- Improving available templates and generate messages that are personally customized to each contact
 - In-app text messaging and calling
 - Collecting logs of conversations between the user and the contacts from different platforms (e.g. text messages, Facebook Messenger, Gmail)
 - Collecting information of the contacts on social networking sites and other online sources
 - Using this information to construct suggestions for conversations, emails and messages
-- Improving available templates and generate messages that are personally customized to each contact
 
 <br>
 
