@@ -12,7 +12,7 @@ Bond is an application that helps remind users to keep in touch with others, thu
 <br>
 
 In the future, an iOS version for this app will be created. Additional features will also be implemented, such as:
-- Improving available templates and generate messages that are personally customized to each contact
+- Personally customizing templates and messages to each contact
 - In-app text messaging and calling
 - Collecting logs of conversations between the user and the contacts from different platforms (e.g. text messages, Facebook Messenger, Gmail)
 - Collecting information of the contacts on social networking sites and other online sources
@@ -39,6 +39,6 @@ This app was created in Android Studio and implemented Android build system.
 * [CalendarCustomView.java](https://github.com/vantrinh7/Bond/blob/master/app/src/main/java/com/example/demouser/bond/CalendarCustomView.java) creates a calendar view using GridAdapter.java. This class also specifies what happens when there are click events on each grid cell.
 * [GridAdapter.java](https://github.com/vantrinh7/Bond/blob/master/app/src/main/java/com/example/demouser/bond/GridAdapter.java) extends ArrayAdapter and constructs a calendar grid view. It also adds and displays current date and events on the calendar.
 * [EventObjects.java](https://github.com/vantrinh7/Bond/blob/master/app/src/main/java/com/example/demouser/bond/EventObjects.java) defines an event with the date and content of the event.
-* [TemplateMainActivity.java](https://github.com/vantrinh7/Bond/blob/master/app/src/main/java/com/example/demouser/bond/TemplateMainActivity.java) creates the Template screen. This class has methods to create image buttons representing available templates. Each button is a TemplateMainItemObject. The class also uses a GridAdapter to generate a grid view.
+* [TemplateMainActivity.java](https://github.com/vantrinh7/Bond/blob/master/app/src/main/java/com/example/demouser/bond/TemplateMainActivity.java) creates the Template screen. This class has methods to create image buttons representing available templates. Each button is a TemplateMainItemObject. This class also uses a GridAdapter to generate a grid view.
 * [TemplateMainItemObject.java](https://github.com/vantrinh7/Bond/blob/master/app/src/main/java/com/example/demouser/bond/TemplateMainItemObjects.java) specifies an object on the template screen. It has methods to get and set content of the object.
 * [TemplateGridAdapter.java](https://github.com/vantrinh7/Bond/blob/master/app/src/main/java/com/example/demouser/bond/TemplateGridAdapter.java) extends ArrayAdapter and contructs a grid view on the temmplate screen. 
