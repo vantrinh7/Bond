@@ -1,6 +1,6 @@
 # Bond ![logo](misc/Bond%20Logo%202.png)
 
-Bond is an application that helps remind users to keep in touch with others, thus establishing the bonds between people and enhacing personal relationships. This app was originally created for Android, and has so far contained several features:
+Bond is an application that reminds users to keep in touch with others, thus establishing the bonds between people and enhacing their personal relationships. This app was originally created for Android. It has so far contained several features:
 - Recording and saving detailed information of a contact (e.g. name, phone number, birthday, hobbies, first impression, etc.)
 - Setting up reminders that notify user of the next time to connect with someone
 - Viewing upcoming schedule in a calendar overview
